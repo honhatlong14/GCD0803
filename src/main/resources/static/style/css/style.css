@@ -1,0 +1,93 @@
+/* General */
+.row {
+    margin: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* Jumbotron */
+.jumbotron {
+    padding: 1.2rem;
+}
+
+/* Navbar */
+input.search {
+    width: 80% !important;
+    border: none;
+}
+
+button.btn_search {
+    padding: 0;
+}
+
+input.search:focus {
+    outline: none;
+}
+
+span.search_box {
+    background-color: white;
+    width: 100%;
+    padding: 0px 15px;
+    border-radius: 20px;
+}
+
+a.nav-link {
+    padding: 0 2rem !important;
+}
+
+li.nav-item > a.active {
+    color: black !important;
+}
+
+ul.navbar-nav {
+    width: 100%;
+    padding-left: 10%;
+}
+
+div.user_mng {
+    padding: 4% 0;
+}
+
+.fa-sign-out-alt {
+    color: red;
+}
+
+.fa-sign-in-alt {
+    color: green;
+}
+
+/* List */
+li > a.nav-link-column {
+    display: block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    list-style: none;
+    text-decoration: none;
+}
+
+/*Top main content*/
+.body_top {
+    margin: 10px 0px;
+}
+
+.add-new {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+
+/*Pagination*/
+.page-link {
+    color: black;
+}
+
+/* Option */
+.border {
+    border: 1px solid black !important;
+}

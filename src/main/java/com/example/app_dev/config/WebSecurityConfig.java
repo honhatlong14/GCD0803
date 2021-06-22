@@ -1,6 +1,7 @@
 package com.example.app_dev.config;
 
-import com.soren.service.impl.UserDetailsServiceImpl;
+import com.example.app_dev.service.impl.UserDetailsServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
