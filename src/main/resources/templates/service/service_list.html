@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head_fragment}"></head>
+<body>
+
+<div class="container-fluid justify-content-center m-0 p-0">
+
+<!--    head_navbar-->
+    <div th:replace="~{layout :: head_navbar}"></div>
+
+<!--    create-->
+    <div class="m-3 row text-center">
+        <div class="col text-decoration-none">
+            <button type="button"
+                    sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER','ROLE_ADMIN')"
+                    class="btn btn-success dropdown-toggle" data-toggle="dropdown" title="Create">
+                <i class="far fa-plus-square"></i>
+            </button>
+            <div class="dropdown-menu">
+                <a th:href="@{/service/create(type=1)}" class="text-decoration-none">
+                    <button class="dropdown-item text-success" title="Create Villa" type="button">Villa</button>
+                </a>
+                <a th:href="@{/service/create(type=2)}" class="text-decoration-none">
+                    <button class="dropdown-item text-warning" title="Create House" type="button">House</button>
+                </a>
+                <a th:href="@{/service/create(type=3)}" class="text-decoration-none">
+                    <button class="dropdown-item text-info" title="Create Room" type="button">Room</button>
+                </a>
+            </div>
+        </div>
+        <div class="col-11">
+            <h1 style="color: teal">LIST SERVICE</h1>
+        </div>
+    </div>
+
+<!--    message-->
+    <div th:if="${message}">
+        <div id="alertServiceFade" class="alert alert-success alert-dismissible fade show font-weight-bold">
+            <button type="button" class="close float-right" data-dismiss="alert">&times;</button>
+            <span th:text="${message}"></span>
+        </div>
+    </div>
+
+<!--    table-->
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Area</th>
+                <th>Cost</th>
+                <th>Max People</th>
+                <th>Standard Room</th>
+                <th hidden>Description</th>
+                <th>Pool Area</th>
+                <th>Floor</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="service, iterStat : ${listService}">
+                <tr>
+                    <td th:text="${iterStat.count}"></td>
+                    <th th:text="${service.serviceId}"></th>
+                    <td th:text="${service.serviceName}"></td>
+                    <td th:text="${service.serviceType.serviceTypeName}"></td>
+                    <td th:text="${service.serviceArea}"></td>
+                    <td th:text="${service.serviceCost}"></td>
+                    <td th:text="${service.serviceMaxPeople}"></td>
+                    <td th:text="${service.standardRoom}"></td>
+                    <td hidden th:text="${service.description}"></td>
+                    <td th:text="${service.poolArea}"></td>
+                    <td th:text="${service.numberOfFloor}"></td>
+                    <td>
+                        <button class="viewServiceButton btn btn-info"
+                                sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER','ROLE_ADMIN','ROLE_EMPLOYEE')"
+                                title="View Service"
+                                th:value="${service.serviceId}" type="button">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="editServiceButton btn btn-warning"
+                                sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER')"
+                                title="Edit Service"
+                                th:value="${service.serviceId}" type="button">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="deleteServiceButton btn btn-danger"
+                                sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER')"
+                                title="Delete Service"
+                                th:value="${service.serviceId}" type="button">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div th:replace="~{layout :: modal}"></div>
+<div th:replace="~{layout :: script_link}"></div>
+<div th:replace="~{layout :: ser_func_script}"></div>
+<div th:replace="~{layout :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+    <link rel="stylesheet" href="/style/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/style/fontawesome/css/all.min.css" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        *{
+            font-family: 'Press Start 2P', cursive;
+            box-sizing: border-box;
+        }
+        #app {
+            padding: 1rem;
+            background: black;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            color: #54FE55;
+            text-shadow: 0 0 10px;
+            font-size: 7rem;
+            flex-direction: column;
+        }
+        .txt {
+            font-size: 2rem;
+        }
+        @keyframes blink {
+            0%   {opacity: 0}
+            49%  {opacity: 0}
+            50%  {opacity: 1}
+            100% {opacity: 1}
+        }
+
+        .blink {
+            animation-name: blink;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+    </style>
+</head>
+<body>
+<div id="app" style="color: yellow">
+    <div>404</div>
+    <div class="txt">
+        Error<span class="blink">
+
+        <i class="fas fa-2x fa-exclamation-triangle"></i>
+    </span>
+    </div>
+</div>
+</body>
+</html>

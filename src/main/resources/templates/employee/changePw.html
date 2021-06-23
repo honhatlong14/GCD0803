@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head_fragment}"></head>
+<body>
+
+<div class="container-fluid justify-content-center m-0 p-0">
+
+<!--    head_navbar-->
+    <div th:replace="~{layout :: head_navbar}"></div>
+
+<!--    Title-->
+    <div class="m-3 row text-center">
+        <div class="col-1">
+            <a href="/employee/">
+                <button class="btn btn-info" type="button">Back</button>
+            </a>
+        </div>
+        <div class="col-11">
+            <h1 style="color: teal" class="text-center">
+                <span>Change Password for account : </span>
+                <span th:text="${employee.user.username}"></span>
+            </h1>
+        </div>
+    </div>
+
+<!--    form-->
+    <div class="container col-6 justify-content-center align-items-center">
+        
+        <form th:action="@{/employee/changePw}" method="post">
+            <table class="table table-hover">
+                <thead></thead>
+                <tbody>
+                <input type="hidden" name="id" th:value="${id}">
+                <tr>
+                    <th>Old Password</th>
+                    <td class="row align-items-center justify-content-center">
+                        <input type="password" id="inputPw" name="oldPw"
+                               style="margin-right: 0"
+                               th:value="${oldPw}" class="form-control col-9" required>
+                        <i class="text-info float-right far fa-eye col-2"
+                           style="padding-left: 30px"
+                           onclick="seePassword()">
+                        </i>
+                    </td>
+                    <p class="errorMessage" th:if="${messageOldPw}" th:text="${messageOldPw}"></p>
+                </tr>
+                <tr>
+                    <th>New Password</th>
+                    <td>
+                        <input type="password" name="newPw" class="form-control col-10" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Confirm</th>
+                    <td>
+                        <input type="password" name="confirmPw" class="form-control col-10" required>
+                        <p class="errorMessage" th:if="${messageConfirm}" th:text="${messageConfirm}"></p>
+                    </td>
+                </tr>
+                <tr class="mt-3">
+                    <td></td>
+                    <td>
+                        <button class="btn btn-warning" type="submit">Change</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+</div>
+
+<div th:replace="~{layout :: script_link}"></div>
+<div th:replace="~{layout :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head_fragment}"></head>
+<body>
+
+<div class="container-fluid justify-content-center m-0 p-0">
+
+    <!--    head_navbar-->
+    <div th:replace="~{layout :: head_navbar}"></div>
+
+    <!--    Back-->
+    <div class="m-3 row text-center">
+        <div class="col">
+            <a th:href="@{/customer}" class="text-decoration-none">
+                <button class="btn btn-info" title="Back" type="button">
+                    Back
+                </button>
+            </a>
+        </div>
+        <div class="col-11">
+            <h1 style="color: teal" class="text-center">Add New Customer</h1>
+        </div>
+    </div>
+
+<!--    table-->
+    <div class="container">
+        <form th:action="@{/customer/create}" th:object="${customer}" method="post">
+            <table class="table table-hover">
+                <thead></thead>
+                <tbody>
+                <tr>
+                    <td>Customer Id</td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="KH-XXXX"
+                               th:field="*{customerId}" required>
+                        <p class="errorMessage" th:if="${#fields.hasErrors('customerId')}"
+                           th:errors="*{customerId}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Customer Name</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{customerName}" required>
+                        <p class="errorMessage" th:if="${#fields.hasErrors('customerName')}"
+                           th:errors="*{customerName}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" th:value="true"
+                                       class="form-check-input" th:field="*{customerGender}">Male
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" th:value="false"
+                                       class="form-check-input" th:field="*{customerGender}">Female
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Customer Type</td>
+                    <td>
+                        <select th:field="*{customerType}" class="form-control">
+                            <option th:each="type : ${listCustomerType}"
+                                    th:value="${type.customerTypeId}"
+                                    th:text="${type.customerTypeName}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Birthday</td>
+                    <td>
+                        <input type="date" class="form-control" th:field="*{customerBirthday}" required>
+                        <p class="errorMessage" th:if="${#fields.hasErrors('customerBirthday')}"
+                           th:errors="*{customerBirthday}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Id Card</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{customerIdCard}" required>
+                        <p class="errorMessage" th:if="${#fields.hasErrors('customerIdCard')}"
+                           th:errors="*{customerIdCard}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{customerPhone}">
+                        <p class="errorMessage" th:if="${#fields.hasErrors('customerPhone')}"
+                           th:errors="*{customerPhone}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{customerEmail}">
+                        <p class="errorMessage" th:if="${#fields.hasErrors('customerEmail')}"
+                           th:errors="*{customerEmail}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{customerAddress}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a th:href="@{/customer}" class="text-decoration-none">
+                            <button class="btn btn-info" title="Back" type="button">
+                                Back
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <button title="Create" class="btn btn-success" type="submit">Create</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+</div>
+
+<div th:replace="~{layout :: script_link}"></div>
+<div th:replace="~{layout :: footer}"></div>
+
+</body>
+</html>

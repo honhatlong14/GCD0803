@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head_fragment}"></head>
+<body id="body">
+
+<div class="container-fluid justify-content-center m-0 p-0">
+
+<!--    head_navbar-->
+    <div th:replace="~{layout :: head_navbar}"></div>
+
+<!--    create-->
+    <div class="m-3 row text-center">
+        <div class="col">
+            <a th:href="@{/customer/create}" class="text-decoration-none">
+                <button class="btn btn-success" sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER','ROLE_ADMIN')"
+                        title="Create Customer">
+                    <i class="far fa-plus-square"></i>
+                </button>
+            </a>
+        </div>
+        <div class="col-10">
+            <h1 style="color: teal">LIST CUSTOMER</h1>
+        </div>
+        <div class="col">
+            <a class="text-decoration-none" th:href="@{/customer/using}" title="List Customer Using Service">
+                <button class="btn btn-outline-danger">
+                    <i class="fas fa-users"></i>
+                </button>
+            </a>
+        </div>
+    </div>
+
+<!--    message-->
+    <div th:if="${message}">
+        <div id="alertCustomerFade" class="alert alert-success alert-dismissible fade show font-weight-bold">
+            <button type="button" class="close float-right" data-dismiss="alert">&times;</button>
+            <span th:text="${message}"></span>
+        </div>
+    </div>
+
+<!--    table-->
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Birthday</th>
+                <th>Gender</th>
+                <th>Id Card</th>
+                <th>Phone</th>
+                <th hidden>Email</th>
+                <th>Address</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="customer, iterStat : ${listCustomer}">
+                <tr>
+                    <td th:text="${iterStat.count}"></td>
+                    <th th:text="${customer.customerId}"></th>
+                    <td th:text="${customer.customerName}"></td>
+                    <td th:text="${customer.customerType.customerTypeName}"></td>
+                    <td th:text="${customer.customerBirthday}"></td>
+                    <td>
+                        <span th:if="${customer.customerGender}" th:text="Male"></span>
+                        <span th:if="${!customer.customerGender}" th:text="Female"></span>
+                    </td>
+                    <td th:text="${customer.customerIdCard}"></td>
+                    <td th:text="${customer.customerPhone}"></td>
+                    <td hidden th:text="${customer.customerEmail}"></td>
+                    <td th:text="${customer.customerAddress}"></td>
+                    <td>
+                        <button class="viewCustomerButton btn btn-info"
+                                sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER','ROLE_ADMIN','ROLE_EMPLOYEE')"
+                                title="View Customer"
+                                th:value="${customer.customerId}" type="button">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <a th:href="@{/customer/edit(id=${customer.customerId})}" class="text-decoration-none">
+                            <button class="btn btn-warning"
+                                    sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER')"
+                                    title="Edit Customer" type="button">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </a>
+                        <button class="deleteCustomerButton btn btn-danger"
+                                sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER')"
+                                title="Delete Customer"
+                                th:value="${customer.customerId}" type="button">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+
+<!--    pageable-->
+    <div class="text-center m-3">
+        <a class="text-decoration-none"
+           th:href="@{'/customer'(page=${listCustomer.number - 1})}"
+           th:if="${listCustomer.hasPrevious()}">
+            <button class="btn btn-outline-danger rounded-circle" title="Previous Pages">
+                <i class="fas fa-fast-backward"></i>
+            </button>
+        </a>
+        <button th:if="${listCustomer.totalPages != 0}" class="btn btn-outline-danger rounded-pill col-1">
+            <span th:text="${listCustomer.number + 1}"></span>
+            /
+            <span th:text="${listCustomer.totalPages}"></span>
+        </button>
+        <a class="text-decoration-none"
+           th:href="@{'/customer'(page=${listCustomer.number + 1})}"
+           th:if="${listCustomer.hasNext()}">
+            <button class="btn btn-outline-danger rounded-circle" title="Next Page">
+                <i class="fas fa-fast-forward"></i>
+            </button>
+        </a>
+    </div>
+
+</div>
+<div th:replace="~{layout :: modal}"></div>
+<div th:replace="~{layout :: script_link}"></div>
+<div th:replace="~{layout :: cus_func_script}"></div>
+<div th:replace="~{layout :: footer}"></div>
+
+</body>
+</html>

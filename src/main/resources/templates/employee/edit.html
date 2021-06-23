@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head_fragment}"></head>
+<body>
+
+<div class="container-fluid justify-content-center m-0 p-0">
+
+    <!--    head_navbar-->
+    <div th:replace="~{layout :: head_navbar}"></div>
+
+    <!--    Back-->
+    <div class="m-3 row text-center">
+        <div class="col">
+            <a th:href="@{/employee}" class="text-decoration-none">
+                <button class="btn btn-info" title="Back" type="button">
+                    Back
+                </button>
+            </a>
+        </div>
+        <div class="col-11">
+            <h1 style="color: teal" class="text-center">Edit Information</h1>
+        </div>
+    </div>
+
+<!--    table-->
+    <div class="container">
+        <form th:action="@{/employee/edit}" th:object="${employee}" method="post">
+            <table class="table table-hover">
+                <thead></thead>
+                <tbody>
+                <tr hidden>
+                    <th>ID</th>
+                    <td>
+                        <input type="text" th:field="*{employeeId}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{employeeName}" required>
+                        <p class="errorMessage" th:if="${#fields.hasErrors('employeeName')}"
+                           th:errors="*{employeeName}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Birthday</td>
+                    <td>
+                        <input type="date" class="form-control" th:field="*{employeeBirthday}" required>
+                        <p class="errorMessage" th:if="${#fields.hasErrors('employeeBirthday')}"
+                           th:errors="*{employeeBirthday}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Position</td>
+                    <td>
+                        <select class="form-control" th:field="*{position}">
+                            <option
+                                    th:each="position : ${listPosition}"
+                                    th:value="${position.positionId}"
+                                    th:text="${position.positionName}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Division</td>
+                    <td>
+                        <select class="form-control" th:field="*{division}">
+                            <option
+                                    th:each="division : ${listDivision}"
+                                    th:value="${division.divisionId}"
+                                    th:text="${division.divisionName}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Education Degree</td>
+                    <td>
+                        <select class="form-control" th:field="*{educationDegree}">
+                            <option
+                                    th:each="edu : ${listEducation}"
+                                    th:value="${edu.educationDegreeId}"
+                                    th:text="${edu.educationDegreeName}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>ID Card</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{employeeIdCard}" required>
+                        <p class="errorMessage" th:if="${#fields.hasErrors('employeeIdCard')}"
+                           th:errors="*{employeeIdCard}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Salary</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{employeeSalary}">
+                        <p class="errorMessage" th:if="${#fields.hasErrors('employeeSalary')}"
+                           th:errors="*{employeeSalary}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{employeePhone}">
+                        <p class="errorMessage" th:if="${#fields.hasErrors('employeePhone')}"
+                           th:errors="*{employeePhone}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{employeeEmail}">
+                        <p class="errorMessage" th:if="${#fields.hasErrors('employeeEmail')}"
+                           th:errors="*{employeeEmail}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{employeeAddress}">
+                    </td>
+                </tr>
+                <tr hidden>
+                    <th>User</th>
+                    <td>
+                        <input type="text" th:field="*{user}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td>
+                        <span th:text="*{user.username}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a th:href="@{/employee}" class="text-decoration-none">
+                            <button class="btn btn-info" title="Back" type="button">
+                                Back
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning" type="submit">Update</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+</div>
+
+<div th:replace="~{layout :: script_link}"></div>
+<div th:replace="~{layout :: footer}"></div>
+
+</body>
+</html>

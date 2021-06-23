@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head_fragment}"></head>
+<body>
+<div class="bg-image container-fluid justify-content-center align-items-center" style="color: white">
+    <div class="row align-items-center" style="height: 633px">
+        <div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
+        <div class="col-lg-4 col-md-6 col-sm-8 col-xs-10">
+            <form th:action="@{/j_spring_security_check}" method="post"
+                  class="form-container p-3 align-items-center" style="height: 460px">
+
+<!--                username-->
+                <div class="form-group mt-2">
+                    <label for="inputEmail"><strong>Username</strong></label>
+                    <input type="text" class="form-control" name="username"
+                           id="inputEmail" placeholder="Username" required>
+                </div>
+
+<!--                password-->
+                <div class="form-group mt-2 mb-2">
+                    <label for="inputPassword">
+                        <strong>Password</strong>
+                    </label>
+                    <div class="row align-items-center">
+                        <input type="password" class="form-control col-10 ml-3" name="password"
+                               id="inputPassword" placeholder="Password" required>
+                        <i class="text-light float-right far fa-eye col-1 m-0"
+                           style="padding-left: 12px"
+                           onclick="seePasswordLogin()">
+                        </i>
+                    </div>
+                </div>
+
+<!--                remember me-->
+                <input type="hidden" name="enabled" th:value="1">
+                <div class="row mt-5 mb-3">
+                    <div class="col-7 check-box">
+                        <label>
+                            <input type="checkbox" name="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <div class="col-5">
+                        <label class="float-right">
+                            <a href="/home" class="text-light"> Back Home </a>
+                        </label>
+                    </div>
+                </div>
+
+<!--                submit button-->
+                <div class="mt-5 mb-4">
+                    <button class="btn btn-success btn-block"
+                            name="submit" type="submit">
+                        Submit
+                    </button>
+                </div>
+
+<!--                login via-->
+                <div class="mt-4 mb-1 text-center">
+                    <label>Login Via</label>
+                </div>
+                <!--                via-->
+                <div class="form-group row" style="color: white">
+                    <button class="col-3 btn bg-transparent text-light" title="Via Facebook">
+                        <i class="fab fa-2x fa-facebook"></i>
+                    </button>
+                    <button class="col-3 btn bg-transparent text-light" title="Via Instagram">
+                        <i class="fab fa-2x fa-instagram"></i>
+                    </button>
+                    <button class="col-3 btn bg-transparent text-light" title="Via Google +">
+                        <i class="fab fa-2x fa-google-plus-g"></i>
+                    </button>
+                    <button class="col-3 btn bg-transparent text-light" title="Via Twitter">
+                        <i class="fab fa-2x fa-twitter"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
+    </div>
+</div>
+<script>
+    function seePasswordLogin() {
+        let x = document.getElementById("inputPassword");
+        x.type = (x.type === "password") ? "text" : "password";
+    }
+</script>
+</body>
+</html>

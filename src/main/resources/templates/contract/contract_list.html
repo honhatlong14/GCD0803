@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout :: head_fragment}"></head>
+<body>
+
+<div class="container-fluid justify-content-center m-0 p-0">
+
+    <!--    head_navbar-->
+    <div th:replace="~{layout :: head_navbar}"></div>
+
+<!--    create-->
+    <div class="m-3 row text-center">
+        <div class="col">
+            <a th:href="@{contract/create}" class="text-decoration-none">
+                <button class="btn btn-success"
+                        sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER','ROLE_ADMIN')"
+                        title="Create Contract">
+                    <i class="far fa-plus-square"></i>
+                </button>
+            </a>
+        </div>
+        <div class="col-11">
+            <h1 style="color: teal">LIST CONTRACT</h1>
+        </div>
+    </div>
+
+<!--    alert-->
+    <div th:if="${message}">
+        <div id="alertContractFade" class="alert alert-success alert-dismissible fade show font-weight-bold">
+            <button type="button" class="close float-right" data-dismiss="alert">&times;</button>
+            <span th:text="${message}"></span>
+        </div>
+    </div>
+
+
+<!--    table-->
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Contract ID</th>
+                <th>Customer</th>
+                <th>Employee</th>
+                <th>Service</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Deposit</th>
+                <th>Total Money</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="contract, iterStat : ${listContract}">
+                <tr>
+                    <td th:text="${iterStat.count}"></td>
+                    <th th:text="${contract.contractId}"></th>
+                    <td th:text="${contract.customer.customerName}"></td>
+                    <td th:text="${contract.employee.employeeName}"></td>
+                    <td th:text="${contract.service.serviceName}"></td>
+                    <td th:text="${contract.contractStartDate}"></td>
+                    <td th:text="${contract.contractEndDate}"></td>
+                    <td th:text="${contract.contractDeposit}"></td>
+                    <td th:text="${contract.contractTotalMoney}"></td>
+                    <td>
+                        <button class="createContractDetail btn btn-success"
+                                sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER','ROLE_ADMIN')"
+                                title="Create Contract Detail"
+                                th:value="${contract.contractId}">
+                            <i class="fas fa-plus-circle"></i>
+                        </button>
+                        <button class="viewContractDetail btn btn-info"
+                                sec:authorize="hasAnyAuthority('ROLE_DIRECTOR','ROLE_MANAGER','ROLE_ADMIN','ROLE_EMPLOYEE')"
+                                title="View Detail"
+                                th:value="${contract.contractId}" type="button">
+                            <i class="far fa-eye"></i>
+                        </button>
+<!--                        hidden-->
+                        <button hidden="hidden" class="editContractButton btn btn-warning" title="Edit"
+                                th:value="${contract.contractId}" type="button">
+                            <i class="fas fa-edit"></i>
+                        </button>
+<!--                        hidden-->
+                        <button hidden="hidden" class="deleteContractButton btn btn-danger" title="Delete"
+                                th:value="${contract.contractId}" type="button">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div th:replace="~{layout :: modal}"></div>
+<div th:replace="~{layout :: modalContractDetail}"></div>
+<div th:replace="~{layout :: script_link}"></div>
+<div th:replace="~{layout :: con_func_script}"></div>
+<div th:replace="~{layout :: footer}"></div>
+
+</body>
+</html>

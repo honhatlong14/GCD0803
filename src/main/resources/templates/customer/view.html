@@ -1,0 +1,48 @@
+<div class="container" xmlns:th="http://www.thymeleaf.org">
+    <h1 style="color: teal" class="text-center">Customer Information</h1>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th th:text="${customer.customerId}"></th>
+        </tr>
+        <tr>
+            <td>Customer Name</td>
+            <td th:text="${customer.customerName}"></td>
+        </tr>
+        <tr>
+            <td>Customer Type</td>
+            <td th:text="${customer.customerType.customerTypeName}"></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>
+                <span th:if="${customer.customerGender}" th:text="Male"></span>
+                <span th:if="${!customer.customerGender}" th:text="Female"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>ID Card</td>
+            <td th:text="${customer.customerIdCard}"></td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td th:text="${customer.customerPhone}"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td th:text="${customer.customerEmail}"></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td th:text="${customer.customerAddress}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button title="Close" type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </td>
+        </tr>
+        </thead>
+    </table>
+</div>

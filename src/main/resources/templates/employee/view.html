@@ -1,0 +1,73 @@
+<div class="container" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <h1 style="color: teal" class="text-center">Employee Information</h1>
+    <table class="table table-hover">
+        <thead></thead>
+        <tbody>
+        <tr>
+            <th>Employee ID</th>
+            <th th:text="${employee.employeeId}"></th>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td th:text="${employee.employeeName}"></td>
+        </tr>
+        <tr>
+            <td>Birthday</td>
+            <td th:text="${employee.employeeBirthday}"></td>
+        </tr>
+        <tr>
+            <td>Position</td>
+            <td th:text="${employee.position.positionName}"></td>
+        </tr>
+        <tr>
+            <td>Division</td>
+            <td th:text="${employee.division.divisionName}"></td>
+        </tr>
+        <tr>
+            <td>Education Degree</td>
+            <td th:text="${employee.educationDegree.educationDegreeName}"></td>
+        </tr>
+        <tr>
+            <td>ID Card</td>
+            <td th:text="${employee.employeeIdCard}"></td>
+        </tr>
+        <tr>
+            <td>Salary</td>
+            <td th:text="${employee.employeeSalary}"></td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td th:text="${employee.employeePhone}"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td th:text="${employee.employeeEmail}"></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td th:text="${employee.employeeAddress}"></td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td th:text="${employee.user.username}"></td>
+        </tr>
+        <tr hidden>
+            <td>Password</td>
+            <td th:text="${employee.user.password}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button title="Close" type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </td>
+            <td>
+                <a th:href="@{/employee/changePw(id=${employee.employeeId})}"
+                   sec:authorize="hasAuthority('ROLE_DIRECTOR')"
+                   class="text-decoration-none">
+                    <button class="btn btn-danger">Change Password</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

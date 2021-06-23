@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head_fragment}"></head>
+<body>
+
+<div class="container-fluid justify-content-center m-0 p-0">
+
+<!--    head_navbar-->
+    <div th:replace="~{layout :: head_navbar}"></div>
+
+<!--    Back-->
+    <div class="m-3 row text-center">
+        <div class="col">
+            <a th:href="@{/service}" class="text-decoration-none">
+                <button class="btn btn-info" title="Back" type="button">
+                    Back
+                </button>
+            </a>
+        </div>
+        <div class="col-11">
+        </div>
+    </div>
+
+<!--    create-->
+    <div>
+        <!--    Villa-->
+        <div class="container" th:if="${type} == 1">
+            <h1 style="color: teal" class="text-center">Add New Villa</h1>
+            <form th:action="@{/service/create}" th:object="${service}" method="post">
+                <table class="table table-hover">
+                    <thead></thead>
+                    <tbody>
+                    <input type="hidden" name="type" value="1">
+                    <tr>
+                        <td>Service Id</td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="DV-XXXX"
+                                   th:field="*{serviceId}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceId')}"
+                               th:errors="*{serviceId}"></p>
+                        </td>
+                    </tr>
+                    <input type="hidden" name="serviceName" th:value="villa">
+                    <tr>
+                        <td>Area</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{serviceArea}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceArea')}"
+                               th:errors="*{serviceArea}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Service Cost</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{serviceCost}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceCost')}"
+                               th:errors="*{serviceCost}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Max People</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{serviceMaxPeople}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceMaxPeople')}"
+                               th:errors="*{serviceMaxPeople}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Standard Room</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{standardRoom}" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{description}">
+                        </td>
+                    </tr>
+                    <input type="hidden" name="serviceType" th:value="1">
+                    <tr>
+                        <td>Rent Type</td>
+                        <td>
+                            <select class="form-control" th:field="*{rentType}">
+                                <option
+                                        th:each="rent : ${listRentType}"
+                                        th:value="${rent.rentTypeId}"
+                                        th:text="${rent.rentTypeName}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pool Area</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{poolArea}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('poolArea')}"
+                               th:errors="*{poolArea}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Number of Floor</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{numberOfFloor}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('numberOfFloor')}"
+                               th:errors="*{numberOfFloor}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/service}" class="text-decoration-none">
+                                <button class="btn btn-info" title="Back" type="button">
+                                    Back
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <button class="btn btn-success" type="submit">Create</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <!--    House-->
+        <div class="container" th:if="${type} == 2">
+            <h1 style="color: teal" class="text-center">Add New House</h1>
+            <form th:action="@{/service/create}" th:object="${service}" method="post">
+                <table class="table table-hover">
+                    <thead></thead>
+                    <tbody>
+                    <input type="hidden" name="type" value="2">
+                    <tr>
+                        <td>Service Id</td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="DV-XXXX"
+                                   th:field="*{serviceId}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceId')}"
+                               th:errors="*{serviceId}"></p>
+                        </td>
+                    </tr>
+                    <input type="hidden" name="serviceName" th:value="house">
+                    <tr>
+                        <td>Area</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{serviceArea}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceArea')}"
+                               th:errors="*{serviceArea}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Service Cost</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{serviceCost}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceCost')}"
+                               th:errors="*{serviceCost}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Max People</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{serviceMaxPeople}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceMaxPeople')}"
+                               th:errors="*{serviceMaxPeople}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Standard Room</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{standardRoom}" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{description}">
+                        </td>
+                    </tr>
+                    <input type="hidden" name="serviceType" th:value="2">
+                    <tr>
+                        <td>Rent Type</td>
+                        <td>
+                            <select class="form-control" th:field="*{rentType}">
+                                <option
+                                        th:each="rent : ${listRentType}"
+                                        th:value="${rent.rentTypeId}"
+                                        th:text="${rent.rentTypeName}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <input type="hidden" name="poolArea" th:value="0">
+                    <tr>
+                        <td>Number of Floor</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{numberOfFloor}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('numberOfFloor')}"
+                               th:errors="*{numberOfFloor}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a th:href="@{/service}" class="text-decoration-none">
+                                <button class="btn btn-info" title="Back" type="button">
+                                    Back
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <button class="btn btn-success" type="submit">Create</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <!--    Room-->
+        <div class="container" th:if="${type} == 3">
+            <h1 style="color: teal" class="text-center">Add New Room</h1>
+            <form th:action="@{/service/create}" th:object="${service}" method="post">
+                <table class="table table-hover">
+                    <thead></thead>
+                    <tbody>
+                    <input type="hidden" name="type" value="3">
+                    <tr>
+                        <td>Service Id</td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="DV-XXXX"
+                                   th:field="*{serviceId}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceId')}"
+                               th:errors="*{serviceId}"></p>
+                        </td>
+                    </tr>
+                    <input type="hidden" name="serviceName" th:value="room">
+                    <tr>
+                        <td>Area</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{serviceArea}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceArea')}"
+                               th:errors="*{serviceArea}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Service Cost</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{serviceCost}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceCost')}"
+                               th:errors="*{serviceCost}"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Max People</td>
+                        <td>
+                            <input type="text" class="form-control" th:field="*{serviceMaxPeople}" required>
+                            <p class="errorMessage" th:if="${#fields.hasErrors('serviceMaxPeople')}"
+                               th:errors="*{serviceMaxPeople}"></p>
+                        </td>
+                    </tr>
+                    <input type="hidden" name="standardRoom" th:value="null">
+                    <input type="hidden" name="description" th:value="null">
+                    <input type="hidden" name="serviceType" th:value="3">
+                    <tr>
+                        <td>Rent Type</td>
+                        <td>
+                            <select class="form-control" th:field="*{rentType}">
+                                <option
+                                        th:each="rent : ${listRentType}"
+                                        th:value="${rent.rentTypeId}"
+                                        th:text="${rent.rentTypeName}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <input type="hidden" name="poolArea" th:value="0">
+                    <input type="hidden" name="numberOfFloor" th:value="0">
+                    <tr>
+                        <td>
+                            <a th:href="@{/service}" class="text-decoration-none">
+                                <button class="btn btn-info" title="Back" type="button">
+                                    Back
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <button class="btn btn-success" type="submit">Create</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="~{layout :: script_link}"></div>
+<div th:replace="~{layout :: footer}"></div>
+
+</body>
+</html>

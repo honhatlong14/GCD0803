@@ -1,0 +1,46 @@
+<div class="container" xmlns:th="http://www.thymeleaf.org">
+    <h1 style="color: teal" class="text-center">
+        Contract ID <span th:text="${contract.contractId}"></span> Detail
+    </h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Contract ID</th>
+                <th>Contract Detail ID</th>
+                <th>Attach Service</th>
+                <th>Cost</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="conDetail, iterStat : ${listContractDetail}">
+            <tr>
+                <td th:text="${iterStat.count}"></td>
+                <th th:if="${iterStat.first}" th:text="${contract.contractId}"></th>
+                <td th:if="${!iterStat.first}"></td>
+                <td th:text="${conDetail.contractDetailId}"></td>
+                <td th:text="${conDetail.attachService.attachServiceName}"></td>
+                <td th:text="${conDetail.attachService.attachServiceCost}"></td>
+                <td th:text="${conDetail.quantity}"></td>
+            </tr>
+        </th:block>
+        <tr style="border-top: 2px solid dodgerblue">
+            <td>
+                <button title="Close" type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </td>
+            <td colspan="2"></td>
+            <th>Total Money</th>
+            <td></td>
+            <th>
+                <strong style="color: green">
+                    <span th:text="${contract.contractTotalMoney}"></span>
+                    <span> $</span>
+                </strong>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

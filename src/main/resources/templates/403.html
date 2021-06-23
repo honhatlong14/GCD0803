@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>403</title>
+    <link rel="stylesheet" href="/style/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/style/fontawesome/css/all.min.css" type="text/css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        * {
+            font-family: 'Press Start 2P', cursive;
+            box-sizing: border-box;
+        }
+
+        .app {
+            padding: 1rem;
+            background: black;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            color: #54FE55;
+            text-shadow: 0 0 10px;
+            font-size: 6rem;
+            flex-direction: column;
+        }
+
+        .txt {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0
+            }
+            49% {
+                opacity: 0
+            }
+            50% {
+                opacity: 1
+            }
+            100% {
+                opacity: 1
+            }
+        }
+
+        .blink {
+            animation-name: blink;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <div class="mt-5">403</div>
+    <div class="txt">
+        Forbidden<span class="blink">_</span>
+    </div>
+    <table class="app table table-borderless" style="font-size: 1.8rem">
+        <tbody>
+        <tr>
+            <td class="mr-2 float-right">
+                <a href="/login" class="text-decoration-none"
+                   style="color: #54FE55;text-shadow: 0 0 10px">
+                    Login
+                    <span>
+                        <i class="fab fa-2x fa-phoenix-framework"></i>
+                    </span>
+                </a>
+            </td>
+            <td>
+                <a href="/home" class="text-decoration-none"
+                   style="color: #54FE55;text-shadow: 0 0 10px">
+                    Home
+                    <span>
+                        <i class="fab fa-2x fa-fort-awesome-alt"></i>
+                    </span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

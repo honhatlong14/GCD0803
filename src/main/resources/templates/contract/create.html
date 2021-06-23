@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head_fragment}"></head>
+<body>
+
+<div class="container-fluid justify-content-center m-0 p-0">
+
+    <!--    head_navbar-->
+    <div th:replace="~{layout :: head_navbar}"></div>
+
+    <!--    Back-->
+    <div class="m-3 row text-center">
+        <div class="col">
+            <a th:href="@{/contract}" class="text-decoration-none">
+                <button class="btn btn-info" title="Back" type="button">
+                    Back
+                </button>
+            </a>
+        </div>
+        <div class="col-11">
+            <h1 style="color: teal" class="text-center">Add New Contract</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <form th:action="@{/contract/create}" th:object="${contract}" method="post">
+            <table class="table table-hover">
+                <thead></thead>
+                <tbody>
+                <input type="hidden" th:field="*{contractId}">
+                <tr>
+                    <td>Customer</td>
+                    <td>
+                        <select class="form-control search-text" style="width: 100%"
+                                th:field="*{customer}">
+                            <option
+                                    th:each="customer : ${listCustomer}"
+                                    th:value="${customer.customerId}"
+                                    th:text="${customer.customerName}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Employee</td>
+                    <td>
+                        <select class="search-text form-control" style="width: 100%"
+                                th:field="*{employee}">
+                            <option th:each="employee : ${listEmployee}"
+                                    th:value="${employee.employeeId}"
+                                    th:text="${employee.employeeName}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Service</td>
+                    <td>
+                        <select class="search-text form-control" style="width: 100%"
+                                th:field="*{service}">
+                            <option th:each="service : ${listService}"
+                                    th:value="${service.serviceId}"
+                                    th:text="${service.serviceName}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Start Date</td>
+                    <td>
+                        <input type="date" class="form-control" th:field="*{contractStartDate}">
+                        <p class="errorMessage" th:if="${#fields.hasErrors('contractStartDate')}"
+                           th:errors="*{contractStartDate}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>End Date</td>
+                    <td>
+                        <input type="date" class="form-control" th:field="*{contractEndDate}">
+                        <p class="errorMessage" th:if="${#fields.hasErrors('contractEndDate')}"
+                           th:errors="*{contractEndDate}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Deposit</td>
+                    <td>
+                        <input type="text" class="form-control" th:field="*{contractDeposit}">
+                        <p class="errorMessage" th:if="${#fields.hasErrors('contractDeposit')}"
+                           th:errors="*{contractDeposit}"></p>
+                    </td>
+                </tr>
+                <input type="hidden" th:field="*{contractTotalMoney}">
+                <tr>
+                    <td>
+                        <a th:href="@{/contract}" class="text-decoration-none">
+                            <button class="btn btn-info" title="Back" type="button">
+                                Back
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <button title="Create" class="btn btn-success" type="submit">Create</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <div th:replace="~{layout :: script_link}"></div>
+    <div th:replace="~{layout :: footer}"></div>
+
+</div>
+</body>
+</html>
